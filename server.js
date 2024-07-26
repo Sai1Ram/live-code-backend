@@ -49,6 +49,9 @@ io.on("connect", (socket) => {
     socket.to(socketId).emit(ACTIONS.CODE_CHANGE, code);
   });
 });
+app.get("/", (req, res) => {
+  res.send("Server is running");
+});
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
