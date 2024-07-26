@@ -7,10 +7,12 @@ const app = express();
 const server = http.createServer(app);
 const PORT = process.env.PORT || 5000;
 
+const corsOptions = {
+  origin: 'http://localhost:3000/', // Replace with your frontend domain
+  optionsSuccessStatus: 200,
+};
 const io = new Server(server, {
-  cors: {
-    origin: "*",
-  },
+  cors: corsOptions,
 });
 const users = new Map();
 const getAllUsers = (roomId) => {
