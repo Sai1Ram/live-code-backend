@@ -47,13 +47,16 @@ io.on("connect", (socket) => {
   socket.on(ACTIONS.CODE_CHANGE, ({ value, roomId }) => {
     socket.to(roomId).emit(ACTIONS.CODE_CHANGE, value);
   });
-  socket.on(ACTIONS.SYNC_CODE, ({ socketId, code, language }) => {
+  socket.on(ACTIONS.SYNC_CODE, ({ socketId, code}) => {
     socket.to(socketId).emit(ACTIONS.CODE_CHANGE, code);
-    socket.to(socketId).emit(ACTIONS.LANGUAGE_CHANGE, language);
   });
+  socket.on(ACTIONS.SYNC_LANGUAGE, ({socketId, language})=>{
+    socket.to(socketId).emit(ACTIONS.LANGUAGE_CHANGE, language);
+  })
   socket.on(ACTIONS.LANGUAGE_CHANGE, ({ language, roomId }) => {
     socket.to(roomId).emit(ACTIONS.LANGUAGE_CHANGE, language);
   });
+
 });
 app.get("/", (req, res) => {
   res.send("Server is running");
